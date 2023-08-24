@@ -89,13 +89,41 @@ class CardImc extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    removerCard(imc.idImc);
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text('Removendo registro'),
-                      backgroundColor: Colors.black87,
-                      behavior: SnackBarBehavior.floating,
-                      elevation: 150.0,
-                    ));
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext bc) {
+                          return AlertDialog(
+                            title: Text("Excluir IMC registrado?"),
+                            content: Text(
+                                "Voce deseja realmente excluir este registro?"),
+                            actions: [
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text(
+                                    "Cancelar",
+                                    style: TextStyle(color: Colors.black87),
+                                  )),
+                              TextButton(
+                                  onPressed: () {
+                                    removerCard(imc.idImc);
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(const SnackBar(
+                                      content: Text('Removendo registro'),
+                                      backgroundColor: Colors.black87,
+                                      behavior: SnackBarBehavior.floating,
+                                      elevation: 150.0,
+                                    ));
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text(
+                                    "Excluir",
+                                    style: TextStyle(color: Colors.red),
+                                  )),
+                            ],
+                          );
+                        });
                   },
                   child: const Icon(
                     Icons.delete,

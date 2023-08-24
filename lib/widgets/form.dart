@@ -145,6 +145,7 @@ class _FormImcState extends State<FormImc> {
                     children: sexos
                         .map(
                           (sexo) => RadioListTile(
+                              dense: true,
                               selected: sexoSelecionado == sexo,
                               title: Text(sexo),
                               value: sexo,
